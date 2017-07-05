@@ -1,7 +1,6 @@
 # AngularPlacesAutocompleteApp
   Angular Application which uses Google's Autocomplete feature with Places API. 
-  (inspired by this tutorial http://brianflove.com/2016/10/18/angular-2-google-maps-places-autocomplete/)
-
+  
 # Live Demo
   https://angular2-autocomplete.herokuapp.com/
 
