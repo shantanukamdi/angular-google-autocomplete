@@ -23,13 +23,13 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.zoom = 4;
-    this.latitude = 39.8282;
-    this.longitude = -98.5795;
+    this.zoom = 7;
+    this.latitude = 28.7041;
+    this.longitude = 77.1025;
 
     this.searchControl = new FormControl();
 
-    this.setCurrentPosition();
+    this.setBrowserPostion();
 
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit{
       });
     });
   }
-  private setCurrentPosition(){
+  private setBrowserPostion(){
     if('geolocation' in navigator){
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
