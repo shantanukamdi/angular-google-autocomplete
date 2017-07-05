@@ -1,4 +1,5 @@
 # AngularPlacesAutocompleteApp
+  Angular Application which uses Google's Autocomplete feature with Places API.
 
 # Live Demo
   https://angular2-autocomplete.herokuapp.com/
