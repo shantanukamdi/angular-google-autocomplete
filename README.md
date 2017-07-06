@@ -2,7 +2,7 @@
   Angular Application which uses Google's Autocomplete feature with Places API. 
   
 # Live Demo
-  https://angular2-autocomplete.herokuapp.com/
+  https://angular2-maps.herokuapp.com/
 
 # Steps to run the application
   1. Fork/clone the repo
