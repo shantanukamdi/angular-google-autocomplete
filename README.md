@@ -1,4 +1,4 @@
-# AngularPlacesAutocompleteApp
+# Angular Nearby App using Google Places API
   Angular Application which uses Google's Autocomplete feature with Places API. 
   
 # Live Demo
