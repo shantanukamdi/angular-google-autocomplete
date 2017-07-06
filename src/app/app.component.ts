@@ -32,6 +32,10 @@ export class AppComponent implements OnInit{
       value: 'airport'
     },
     {
+      name: 'RAILWAY STATION',
+      value: 'train_station'
+    },
+    {
       name: 'BUS STATION',
       value: 'bus_station'
     },
@@ -48,8 +52,12 @@ export class AppComponent implements OnInit{
       value: 'police',
     },
     {
-      name: 'POLICE',
-      value: 'police',
+      name: 'PHARMACY',
+      value: 'pharmacy',
+    },
+    {
+      name: 'SCHOOLS',
+      value: 'school'
     },
     {
       name: 'ATMs',
@@ -119,9 +127,12 @@ export class AppComponent implements OnInit{
     // default is 2 KMS
     let radius = 2000;
 
-    // if the place is airport, set radius to 50000
+    
     if(place === 'airport'){
       radius = 50000;
+    }
+    if(place === 'train_station'){
+      radius = 20000;
     }
 
     var request = {
@@ -145,8 +156,5 @@ export class AppComponent implements OnInit{
        this.pService.done();
     });
   }
-
-  
-  
  
 }

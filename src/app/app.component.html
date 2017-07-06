@@ -2,7 +2,7 @@
  <div class="container-fluid">
   <div class="row">
     <div class="col-md-4 nopadding" style="height: 100vh;">
-      <h1>Angular Places</h1>
+      <h1>Angular Nearby Search</h1>
       <div class="form-group">
         <input placeholder="Enter Location" 
         autocorrect="off" autocapitalize="off" 
@@ -10,10 +10,11 @@
          #search [formControl]="searchControl">
       </div>
       
+      <h5>Choose Type of Place</h5>
       <div class="form-group">  
         <ul class="list-group">
           <li class="list-group-item" *ngFor = "let p of places" (click) = "loadPlaces(p.value);">
-            {{p.name}}
+            <a href="#">{{p.name}}</a>
           </li>
         </ul>
       </div>
