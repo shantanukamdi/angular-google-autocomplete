@@ -28,13 +28,40 @@ export class AppComponent implements OnInit{
 
   public places: Array<any> = [
     {
-      name: 'atm'
+      name: 'AIRPORT',
+      value: 'airport'
     },
     {
-      name: 'hospitals'
+      name: 'BUS STATION',
+      value: 'bus_station'
     },
     {
-      name: 'restaurant'
+      name: 'BANKS',
+      value: 'bank'
+    },
+    {
+      name: 'MOVIE THEATER',
+      value: 'movie_theater'
+    },
+    {
+      name: 'POLICE',
+      value: 'police',
+    },
+    {
+      name: 'POLICE',
+      value: 'police',
+    },
+    {
+      name: 'ATMs',
+      value: 'atm'
+    },
+    {
+      name: 'HOSPITALS',
+      value: 'hospitals'
+    },
+    {
+      name: 'RESTAURANT',
+      value: 'restaurant'
     },
   ];
 
@@ -91,7 +118,7 @@ export class AppComponent implements OnInit{
 
     var request = {
       location: new google.maps.LatLng(this.lat, this.lng),
-      radius: 500,
+      radius: 50000,
       type: [ place ]
     };
 

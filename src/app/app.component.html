@@ -12,7 +12,7 @@
       
       <div class="form-group">  
         <ul class="list-group">
-          <li class="list-group-item" *ngFor = "let p of places" (click) = "loadPlaces(p.name);">
+          <li class="list-group-item" *ngFor = "let p of places" (click) = "loadPlaces(p.value);">
             {{p.name}}
           </li>
         </ul>
