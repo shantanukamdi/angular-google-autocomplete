@@ -1,7 +1,7 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MapsAPILoader } from '@agm/core';
-import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { NgProgressService } from "ng2-progressbar";
 
 import {} from '@types/googlemaps'; 
 
@@ -74,7 +74,7 @@ export class AppComponent implements OnInit{
 
   constructor(private mapsAPILoader: MapsAPILoader, 
               private ngZone: NgZone,
-              private slimLoadingBarService: SlimLoadingBarService
+              private pService: NgProgressService
   ){ }
 
   ngOnInit(){
@@ -112,13 +112,21 @@ export class AppComponent implements OnInit{
 
   loadPlaces(place: string){
 
+    this.pService.start();
     
     this.markers = [];
     console.log("Place is ",place);
+    // default is 2 KMS
+    let radius = 2000;
+
+    // if the place is airport, set radius to 50000
+    if(place === 'airport'){
+      radius = 50000;
+    }
 
     var request = {
       location: new google.maps.LatLng(this.lat, this.lng),
-      radius: 50000,
+      radius: radius,
       type: [ place ]
     };
 
@@ -134,7 +142,7 @@ export class AppComponent implements OnInit{
             });
           }
       }
-      
+       this.pService.done();
     });
   }
 
