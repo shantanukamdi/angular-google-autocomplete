@@ -1,8 +1,16 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MapsAPILoader } from '@agm/core';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 import {} from '@types/googlemaps'; 
+
+interface marker {
+  lat: number;
+  lng: number;
+  label?: string;
+  draggable: boolean;
+}
 
 @Component({
   selector: 'app-root',
@@ -10,26 +18,40 @@ import {} from '@types/googlemaps';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  public latitude: number;
-  public longitude: number;
+  // initial center position for the map
+  lat: number = 28.7041;
+  lng: number = 77.1025;
   public searchControl: FormControl;
-  public zoom: number;
+  public zoom: number = 5;
+
+  public markers: marker[] = []; 
+
+  public places: Array<any> = [
+    {
+      name: 'atm'
+    },
+    {
+      name: 'hospitals'
+    },
+    {
+      name: 'restaurant'
+    },
+  ];
+
+  public place: google.maps.places.PlaceResult;
+
+  public service;
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
 
-  constructor(private mapsAPILoader: MapsAPILoader, private ngZone: NgZone){
-
-  }
+  constructor(private mapsAPILoader: MapsAPILoader, 
+              private ngZone: NgZone,
+              private slimLoadingBarService: SlimLoadingBarService
+  ){ }
 
   ngOnInit(){
-    this.zoom = 7;
-    this.latitude = 28.7041;
-    this.longitude = 77.1025;
-
     this.searchControl = new FormControl();
-
-    this.setBrowserPostion();
 
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
@@ -37,26 +59,59 @@ export class AppComponent implements OnInit{
       });
       autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          this.place = autocomplete.getPlace();
 
-          if(place.geometry === undefined || place.geometry === null){
+          if(this.place.geometry === undefined || this.place.geometry === null){
             return;
           }
 
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
+          this.lat = this.place.geometry.location.lat();
+          this.lng = this.place.geometry.location.lng();
           this.zoom = 12;
+
+          this.markers = [
+            {
+              lat: this.lat,
+              lng: this.lng,
+              label: 'A',
+              draggable: true
+            }
+          ];
         });
       });
     });
+    
   }
-  private setBrowserPostion(){
-    if('geolocation' in navigator){
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.zoom = 12;
-      });
-    }
+
+  loadPlaces(place: string){
+
+    
+    this.markers = [];
+    console.log("Place is ",place);
+
+    var request = {
+      location: new google.maps.LatLng(this.lat, this.lng),
+      radius: 500,
+      type: [ place ]
+    };
+
+    this.service = new google.maps.places.PlacesService(this.searchElementRef.nativeElement);
+    this.service.nearbySearch(request, (results, status) => {
+      if(status == google.maps.places.PlacesServiceStatus.OK){
+          for (var i = 0; i < results.length; i++) {
+            var place = results[i];
+            this.markers.push({
+              lat: place.geometry.location.lat(),
+              lng: place.geometry.location.lng(),
+              draggable: false
+            });
+          }
+      }
+      
+    });
   }
+
+  
+  
+ 
 }

@@ -1,3 +1,7 @@
 agm-map {
-      height: 500px;
+      height: 100vh;
+}
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
 }

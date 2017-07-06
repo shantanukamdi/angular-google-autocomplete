@@ -1,9 +1,28 @@
- <div class="container">
-  <h1>Angular Places Autocomplete</h1>
-  <div class="form-group">
-    <input placeholder="Enter Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+ <div class="container-fluid">
+  <ng2-slim-loading-bar></ng2-slim-loading-bar>
+  <div class="row">
+    <div class="col-md-4 nopadding" style="height: 100vh;">
+      <h1>Angular Places</h1>
+      <div class="form-group">
+        <input placeholder="Enter Location" 
+        autocorrect="off" autocapitalize="off" 
+        spellcheck="off" type="text" class="form-control"
+         #search [formControl]="searchControl">
+      </div>
+      
+      <div class="form-group">  
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor = "let p of places" (click) = "loadPlaces(p.name);">
+            {{p.name}}
+          </li>
+        </ul>
+      </div>
+      
+    </div>
+    <div class="col-md-8 nopadding">
+      <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [zoom]="zoom">
+        <agm-marker *ngFor = "let m of markers" [latitude]="m.lat" [longitude]="m.lng"></agm-marker>
+      </agm-map>
+    </div>
   </div>
-  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="true" [zoom]="zoom">
-    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-  </agm-map>
 </div>
