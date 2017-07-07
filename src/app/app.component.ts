@@ -156,6 +156,7 @@ export class AppComponent implements OnInit{
       if(status == google.maps.places.PlacesServiceStatus.OK){
           for (var i = 0; i < results.length; i++) {
             var place = results[i];
+            // pushing places in markers array
             this.markers.push({
               lat: place.geometry.location.lat(),
               lng: place.geometry.location.lng(),
@@ -163,8 +164,8 @@ export class AppComponent implements OnInit{
             });
           }
       }
-       this.pService.done();
+      // Stop the loader
+      this.pService.done();
     });
   }
- 
 }
