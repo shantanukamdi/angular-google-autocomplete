@@ -132,10 +132,10 @@ export class AppComponent implements OnInit{
     // reset markers if new category is selected
     this.markers = [];
     console.log("Place is ",place);
-    // default is 2 KMS
+    // default radius:  2 KMS
     let radius = 2000;
 
-    
+    /* Increase radius for airport and railway stations */
     if(place === 'airport'){
       radius = 50000;
     }
@@ -143,12 +143,14 @@ export class AppComponent implements OnInit{
       radius = 20000;
     }
 
+    // Creating the request
     var request = {
       location: new google.maps.LatLng(this.lat, this.lng),
       radius: radius,
       type: [ place ]
     };
 
+    // Calling the Google Places API based on the current location
     this.service = new google.maps.places.PlacesService(this.searchElementRef.nativeElement);
     this.service.nearbySearch(request, (results, status) => {
       if(status == google.maps.places.PlacesServiceStatus.OK){
