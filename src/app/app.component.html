@@ -13,7 +13,7 @@
       <h5>Choose Type of Place</h5>
       <div class="form-group">  
         <ul class="list-group">
-          <li class="list-group-item" *ngFor = "let p of places" (click) = "loadPlaces(p.value);">
+          <li class="list-group-item" *ngFor = "let p of places" (click) = "loadPlaces(p.value);" >
             <a href="#">{{p.name}}</a>
           </li>
         </ul>
