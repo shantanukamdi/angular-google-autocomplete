@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 import { NgProgressModule } from 'ng2-progressbar';
 
+import { environment } from '../environments/environment';
+
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -18,7 +20,7 @@ import { AppComponent } from './app.component';
     HttpModule,
     NgProgressModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDJEMOMwH4cyWKY2nL-GiJBaecjhwUvVdw',
+      apiKey: environment.apiKey,
       libraries: ['places']
     })
   ],

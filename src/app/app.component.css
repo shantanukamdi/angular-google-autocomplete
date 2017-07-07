@@ -5,3 +5,8 @@ agm-map {
    padding: 0 !important;
    margin: 0 !important;
 }
+ul li a:visited {
+      background: black;
+      
+      text-decoration: underline;
+}
