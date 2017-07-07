@@ -5,6 +5,7 @@ import { NgProgressService } from "ng2-progressbar";
 
 import {} from '@types/googlemaps'; 
 
+// Interface for google marker
 interface marker {
   lat: number;
   lng: number;
@@ -21,11 +22,15 @@ export class AppComponent implements OnInit{
   // initial center position for the map
   lat: number = 28.7041;
   lng: number = 77.1025;
+  // form control
   public searchControl: FormControl;
+  // zoom level
   public zoom: number = 5;
 
+  // markers array 
   public markers: marker[] = []; 
 
+  // places arra
   public places: Array<any> = [
     {
       name: 'AIRPORT',
@@ -73,6 +78,7 @@ export class AppComponent implements OnInit{
     },
   ];
 
+  // typed place
   public place: google.maps.places.PlaceResult;
 
   public service;
@@ -120,8 +126,10 @@ export class AppComponent implements OnInit{
 
   loadPlaces(place: string){
 
+    // loader start
     this.pService.start();
     
+    // reset markers if new category is selected
     this.markers = [];
     console.log("Place is ",place);
     // default is 2 KMS
