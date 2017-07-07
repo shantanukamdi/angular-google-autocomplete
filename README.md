@@ -7,5 +7,6 @@
 # Steps to run the application
   1. Fork/clone the repo
   2. run `npm install`
-  3. Either run `ng serve` if you are using angular-cli or run `npm start`.
-  4. Go to `localhost:4200` in your web browser.
+  3. Get Google API key from https://console.developers.google.com/apis and paste it in src/environment/environment.ts file.
+  4. Either run `ng serve` if you are using angular-cli or run `npm start`.
+  5. Go to `localhost:4200` in your web browser.
